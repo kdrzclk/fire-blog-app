@@ -28,6 +28,10 @@ const Navbar = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleRegister = () => {
+    navigate("/register");
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar>
@@ -35,7 +39,7 @@ const Navbar = () => {
           <Typography
             component="div"
             sx={{ flexGrow: 1, cursor: "pointer" }}
-            // onClick={() => navigate("/")}
+            onClick={() => navigate("/")}
           >
             <img src={cwLogo} alt="cw" width="40px" />
           </Typography>
@@ -44,7 +48,7 @@ const Navbar = () => {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, cursor: "pointer" }}
-            // onClick={() => navigate("/")}
+            onClick={() => navigate("/")}
           >
             ──── {"<KaDiR/>"} Blog ────
           </Typography>
@@ -125,11 +129,7 @@ const Navbar = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleLogin}>Login</MenuItem>
-                <MenuItem
-                //  onClick={handleRegister}
-                >
-                  Register
-                </MenuItem>
+                <MenuItem onClick={handleRegister}>Register</MenuItem>
               </Menu>
             </div>
           )}

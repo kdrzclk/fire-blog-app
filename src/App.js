@@ -1,9 +1,9 @@
-import Navbar from "./components/Navbar";
+import AppRouter from "./app-router/AppRouter";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <AppRouter />
     </div>
   );
 };

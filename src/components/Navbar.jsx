@@ -9,8 +9,10 @@ import MenuItem from "@mui/material/MenuItem";
 
 import cwLogo from "../assets/cw.jpeg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const currentUser = false;
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -21,6 +23,10 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
     // navigate("/");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -118,13 +124,9 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
+                <MenuItem onClick={handleLogin}>Login</MenuItem>
                 <MenuItem
-                //  onClick={handleLogout}
-                >
-                  Login
-                </MenuItem>
-                <MenuItem
-                //  onClick={handleLogout}
+                //  onClick={handleRegister}
                 >
                   Register
                 </MenuItem>

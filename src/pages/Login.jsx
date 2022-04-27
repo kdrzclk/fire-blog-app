@@ -9,6 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import blog from "../assets/blok.png";
+import google from "../assets/google.png";
 import { login, loginWithGoogle } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +28,28 @@ const Login = () => {
       width: "100vw",
       height: "120vh",
       paddingTop: "40px",
+    },
+    login: {
+      backgroundColor: "#046582",
+      color: "white",
+      fontWeight: "bold",
+      "&:hover": {
+        color: "#046582",
+        backgroundColor: "#D5D5D5",
+      },
+    },
+    googleImg: {
+      width: 75,
+      marginLeft: 10,
+    },
+    googleBtn: {
+      backgroundColor: "white",
+      fontWeight: "bold",
+      mb: 4,
+      color: "black",
+      "&:hover": {
+        backgroundColor: "#D5D5D5",
+      },
     },
   };
 
@@ -118,6 +141,7 @@ const Login = () => {
 
               <Grid item xs={12}>
                 <Button
+                  sx={styles.login}
                   variant="contained"
                   color="primary"
                   onClick={handleLogin}
@@ -128,13 +152,14 @@ const Login = () => {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  sx={{ mb: 4 }}
+                  sx={styles.googleBtn}
                   variant="contained"
                   color="secondary"
                   onClick={handleGoogleSingIn}
                   fullWidth
                 >
-                  CONTINUE WITH GOOGLE
+                  WITH
+                  <img style={styles.googleImg} src={google} alt="google" />
                 </Button>
               </Grid>
             </Grid>

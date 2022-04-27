@@ -14,7 +14,7 @@ import { logout } from "../helpers/firebase";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const currentUser = false;
+  const currentUser = true;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -98,7 +98,7 @@ const Navbar = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem>New</MenuItem>
+                <MenuItem onClick={() => navigate("/new")}>New</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>

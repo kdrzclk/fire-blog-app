@@ -9,6 +9,8 @@ import {
   Button,
 } from "@mui/material";
 import blog from "../assets/blok.png";
+import google from "../assets/google.png";
+
 import { useNavigate } from "react-router-dom";
 import { signup, loginWithGoogle } from "../helpers/firebase";
 
@@ -26,6 +28,28 @@ const Register = () => {
       width: "100vw",
       height: "120vh",
       paddingTop: "40px",
+    },
+    register: {
+      backgroundColor: "#046582",
+      color: "white",
+      fontWeight: "bold",
+      "&:hover": {
+        color: "#046582",
+        backgroundColor: "#D5D5D5",
+      },
+    },
+    googleImg: {
+      width: 75,
+      marginLeft: 10,
+    },
+    googleBtn: {
+      backgroundColor: "white",
+      fontWeight: "bold",
+      mb: 4,
+      color: "black",
+      "&:hover": {
+        backgroundColor: "#D5D5D5",
+      },
     },
   };
 
@@ -116,6 +140,7 @@ const Register = () => {
 
               <Grid item xs={12}>
                 <Button
+                  sx={styles.register}
                   variant="contained"
                   color="primary"
                   onClick={handleRegister}
@@ -126,13 +151,14 @@ const Register = () => {
               </Grid>
               <Grid item xs={12}>
                 <Button
-                  sx={{ mb: 4 }}
+                  sx={styles.googleBtn}
                   variant="contained"
                   color="secondary"
                   onClick={handleGoogleSingIn}
                   fullWidth
                 >
-                  CONTINUE WITH GOOGLE
+                  WITH
+                  <img style={styles.googleImg} src={google} alt="google" />
                 </Button>
               </Grid>
             </Grid>

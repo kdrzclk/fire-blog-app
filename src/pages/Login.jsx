@@ -17,19 +17,22 @@ const Login = () => {
   // const { currentUser } = useSelector((state) => state.auth);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
   const styles = {
     image: {
       backgroundImage: "url(https://picsum.photos/1600/900)",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      width: "100%",
+      width: "100vw",
+      height: "120vh",
       paddingTop: "40px",
     },
   };
 
   const handleGoogleSingIn = () => {
     loginWithGoogle();
+    navigate("/");
   };
 
   const handleLogin = () => {

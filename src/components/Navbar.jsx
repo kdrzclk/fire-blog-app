@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import cwLogo from "../assets/cw.jpeg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../helpers/firebase";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ const Navbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-    // navigate("/");
   };
 
   const handleLogin = () => {
@@ -32,9 +32,17 @@ const Navbar = () => {
   const handleRegister = () => {
     navigate("/register");
   };
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    logout();
+    // dispatch(clearCurrentUser());
+    navigate("/login");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar>
+      <AppBar sx={{ backgroundColor: "#046582" }}>
         <Toolbar>
           <Typography
             component="div"
@@ -50,7 +58,8 @@ const Navbar = () => {
             sx={{ flexGrow: 1, cursor: "pointer" }}
             onClick={() => navigate("/")}
           >
-            ──── {"<KaDiR/>"} Blog ────
+            ──── <span style={{ color: "#F5DEB3" }}>{"<KaDiR/>"}</span> Blog
+            ────
           </Typography>
 
           {currentUser ? (
@@ -89,16 +98,8 @@ const Navbar = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem
-                //  onClick={handleLogout}
-                >
-                  New
-                </MenuItem>
-                <MenuItem
-                //  onClick={handleLogout}
-                >
-                  Logout
-                </MenuItem>
+                <MenuItem>New</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
           ) : (

@@ -23,7 +23,8 @@ const Register = () => {
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      width: "100%",
+      width: "100vw",
+      height: "120vh",
       paddingTop: "40px",
     },
   };

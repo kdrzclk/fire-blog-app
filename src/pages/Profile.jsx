@@ -15,6 +15,7 @@ const Profile = () => {
         alignItems: "center",
         height: "500px",
         marginTop: "100px",
+        boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75);",
       }}
     >
       <Card

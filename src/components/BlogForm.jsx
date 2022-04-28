@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Box,
@@ -10,11 +10,7 @@ import {
 } from "@mui/material";
 import blog from "../assets/blok.png";
 
-const BlogForm = () => {
-  const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [content, setContent] = useState("");
-
+const BlogForm = (newBlog, setNewBlog) => {
   const styles = {
     submit: {
       backgroundColor: "#046582",
@@ -72,7 +68,9 @@ const BlogForm = () => {
                   type="title"
                   // value={email ?? ""}
                   autoComplete="on"
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) =>
+                    setNewBlog({ ...newBlog, title: e.target.value })
+                  }
                   //   fullWidth
                   required
                 />
@@ -88,7 +86,9 @@ const BlogForm = () => {
                   type="image-url"
                   // value={email ?? ""}
                   autoComplete="on"
-                  onChange={(e) => setImageUrl(e.target.value)}
+                  onChange={(e) =>
+                    setNewBlog({ ...newBlog, image: e.target.value })
+                  }
                   //   fullWidth
                   required
                 />
@@ -105,7 +105,9 @@ const BlogForm = () => {
                   type="image-url"
                   // value={email ?? ""}
                   autoComplete="on"
-                  onChange={(e) => setContent(e.target.value)}
+                  onChange={(e) =>
+                    setNewBlog({ ...newBlog, content: e.target.value })
+                  }
                   //   fullWidth
                   required
                   rows={15}

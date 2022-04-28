@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import blog from "../assets/blok.png";
 
-const BlogForm = (newBlog, setNewBlog) => {
+const BlogForm = ({ newBlog, setNewBlog, handleFormSubmit }) => {
   const styles = {
     submit: {
       backgroundColor: "#046582",
@@ -22,6 +22,14 @@ const BlogForm = (newBlog, setNewBlog) => {
       },
     },
   };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    console.log(name, value);
+    setNewBlog({ ...newBlog, [name]: value });
+  };
+
   return (
     <Grid container justify="center">
       <Container
@@ -56,7 +64,7 @@ const BlogForm = (newBlog, setNewBlog) => {
             ── New Blog ──
           </Typography>
 
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <Grid spacing={4}>
               <Grid item xs={12}>
                 <TextField
@@ -66,11 +74,12 @@ const BlogForm = (newBlog, setNewBlog) => {
                   name="title"
                   variant="outlined"
                   type="title"
-                  // value={email ?? ""}
+                  value={newBlog.title}
                   autoComplete="on"
-                  onChange={(e) =>
-                    setNewBlog({ ...newBlog, title: e.target.value })
-                  }
+                  // onChange={(e) =>
+                  //   setNewBlog({ ...newBlog, title: e.target.value })
+                  // }
+                  onChange={handleChange}
                   //   fullWidth
                   required
                 />
@@ -79,16 +88,17 @@ const BlogForm = (newBlog, setNewBlog) => {
               <Grid item xs={12}>
                 <TextField
                   sx={{ width: "400px", mb: 2 }}
-                  id="image-url"
+                  id="image"
                   label="Image URL"
-                  name="image-url"
+                  name="image"
                   variant="outlined"
                   type="image-url"
-                  // value={email ?? ""}
+                  value={newBlog.image}
                   autoComplete="on"
-                  onChange={(e) =>
-                    setNewBlog({ ...newBlog, image: e.target.value })
-                  }
+                  // onChange={(e) =>
+                  //   setNewBlog({ ...newBlog, image: e.target.value })
+                  // }
+                  onChange={handleChange}
                   //   fullWidth
                   required
                 />
@@ -97,17 +107,18 @@ const BlogForm = (newBlog, setNewBlog) => {
               <Grid item xs={12}>
                 <TextField
                   sx={{ width: "400px", mb: 2 }}
-                  id="outlined-multiline-static"
+                  id="content"
                   label="Content"
-                  name="outlined-multiline-static"
+                  name="content"
                   multiline
                   variant="outlined"
                   type="image-url"
-                  // value={email ?? ""}
+                  value={newBlog.content}
                   autoComplete="on"
-                  onChange={(e) =>
-                    setNewBlog({ ...newBlog, content: e.target.value })
-                  }
+                  // onChange={(e) =>
+                  //   setNewBlog({ ...newBlog, content: e.target.value })
+                  // }
+                  onChange={handleChange}
                   //   fullWidth
                   required
                   rows={15}
@@ -121,6 +132,7 @@ const BlogForm = (newBlog, setNewBlog) => {
                   //   color="primary"
                   //   onClick={handleLogin}
                   fullWidth
+                  type="submit"
                 >
                   SUBMIT
                 </Button>

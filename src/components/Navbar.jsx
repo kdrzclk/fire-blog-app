@@ -19,7 +19,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
   // const currentUser = true;
   const [anchorEl, setAnchorEl] = useState(null);
 

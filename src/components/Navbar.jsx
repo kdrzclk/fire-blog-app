@@ -11,10 +11,15 @@ import cwLogo from "../assets/cw.jpeg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../helpers/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCurrentUser } from "../redux/actions/authActions";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const currentUser = true;
+  const dispatch = useDispatch();
+
+  const { currentUser } = useSelector((state) => state.auth);
+  // const currentUser = true;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -36,7 +41,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setAnchorEl(null);
     logout();
-    // dispatch(clearCurrentUser());
+    dispatch(clearCurrentUser());
     navigate("/login");
   };
 

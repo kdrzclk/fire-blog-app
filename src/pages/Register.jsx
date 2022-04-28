@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Box,
@@ -13,9 +13,15 @@ import google from "../assets/google.png";
 
 import { useNavigate } from "react-router-dom";
 import { signup, loginWithGoogle } from "../helpers/firebase";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading, clearLoading } from "../redux/actions/appActions";
+import loadingGif from "../assets/loading.gif";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.app);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -53,13 +59,23 @@ const Register = () => {
     },
   };
 
-  const handleRegister = () => {
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    dispatch(setLoading());
     signup(email, password)
       .then(() => {
         navigate("/");
+        dispatch(clearLoading());
       })
       .catch((error) => {
         alert(error);
+        dispatch(clearLoading());
       });
   };
 
@@ -107,7 +123,7 @@ const Register = () => {
             ── Register ──
           </Typography>
 
-          <form>
+          <form onSubmit={handleRegister}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <TextField
@@ -138,29 +154,53 @@ const Register = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
-                <Button
-                  sx={styles.register}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleRegister}
-                  fullWidth
+              {loading ? (
+                <div
+                  style={{
+                    textAlign: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginLeft: "275px",
+                  }}
                 >
-                  Register
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  sx={styles.googleBtn}
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleGoogleSingIn}
-                  fullWidth
-                >
-                  WITH
-                  <img style={styles.googleImg} src={google} alt="google" />
-                </Button>
-              </Grid>
+                  <Box
+                    xs={{ d: "flex", mt: 2 }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <img src={loadingGif} width="75px" alt="loading_gif" />
+                  </Box>{" "}
+                </div>
+              ) : (
+                <>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      sx={styles.register}
+                      variant="contained"
+                      color="primary"
+                      onClick={handleRegister}
+                      fullWidth
+                    >
+                      Register
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      sx={styles.googleBtn}
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleGoogleSingIn}
+                      fullWidth
+                    >
+                      WITH
+                      <img style={styles.googleImg} src={google} alt="google" />
+                    </Button>
+                  </Grid>
+                </>
+              )}
             </Grid>
           </form>
         </Box>

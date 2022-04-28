@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Box,
@@ -12,10 +12,16 @@ import blog from "../assets/blok.png";
 import google from "../assets/google.png";
 import { login, loginWithGoogle } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading, clearLoading } from "../redux/actions/appActions";
+import loadingGif from "../assets/loading.gif";
 
 const Login = () => {
   const navigate = useNavigate();
-  // const { currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const { currentUser } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.app);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -55,16 +61,25 @@ const Login = () => {
 
   const handleGoogleSingIn = () => {
     loginWithGoogle();
-    navigate("/");
   };
 
-  const handleLogin = () => {
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(setLoading());
     login(email, password)
       .then(() => {
         navigate("/");
+        dispatch(clearLoading());
       })
       .catch((error) => {
         alert(error);
+        dispatch(clearLoading());
       });
   };
 
@@ -108,7 +123,7 @@ const Login = () => {
             ── Login ──
           </Typography>
 
-          <form>
+          <form onSubmit={handleLogin}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <TextField
@@ -139,29 +154,53 @@ const Login = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
-                <Button
-                  sx={styles.login}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleLogin}
-                  fullWidth
+              {loading ? (
+                <div
+                  style={{
+                    textAlign: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginLeft: "275px",
+                  }}
                 >
-                  Login
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  sx={styles.googleBtn}
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleGoogleSingIn}
-                  fullWidth
-                >
-                  WITH
-                  <img style={styles.googleImg} src={google} alt="google" />
-                </Button>
-              </Grid>
+                  <Box
+                    xs={{ d: "flex", mt: 2 }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <img src={loadingGif} width="75px" alt="loading_gif" />
+                  </Box>{" "}
+                </div>
+              ) : (
+                <>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      sx={styles.login}
+                      variant="contained"
+                      color="primary"
+                      // onClick={handleLogin}
+                      fullWidth
+                    >
+                      Login
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      sx={styles.googleBtn}
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleGoogleSingIn}
+                      fullWidth
+                    >
+                      WITH
+                      <img style={styles.googleImg} src={google} alt="google" />
+                    </Button>
+                  </Grid>
+                </>
+              )}
             </Grid>
           </form>
         </Box>

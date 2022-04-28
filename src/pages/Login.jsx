@@ -14,6 +14,8 @@ import { login, loginWithGoogle } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoading, clearLoading } from "../redux/actions/appActions";
+import { setCurrentUser } from "../redux/actions/authActions";
+
 import loadingGif from "../assets/loading.gif";
 
 const Login = () => {
@@ -21,6 +23,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state) => state.auth);
+  console.log(currentUser);
+
   const { loading } = useSelector((state) => state.app);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -61,6 +65,9 @@ const Login = () => {
 
   const handleGoogleSingIn = () => {
     loginWithGoogle();
+
+    console.log(email);
+    console.log(currentUser);
   };
 
   useEffect(() => {
@@ -75,12 +82,15 @@ const Login = () => {
     login(email, password)
       .then(() => {
         navigate("/");
+
         dispatch(clearLoading());
       })
       .catch((error) => {
         alert(error);
         dispatch(clearLoading());
       });
+    console.log(email);
+    console.log(password);
   };
 
   return (
@@ -132,7 +142,7 @@ const Login = () => {
                   name="email"
                   variant="outlined"
                   type="email"
-                  // value={email ?? ""}
+                  value={email ?? ""}
                   autoComplete="on"
                   onChange={(e) => setEmail(e.target.value)}
                   fullWidth
@@ -147,7 +157,7 @@ const Login = () => {
                   variant="outlined"
                   type="password"
                   autoComplete="current-password"
-                  // value={password ?? ""}
+                  value={password ?? ""}
                   onChange={(e) => setPassword(e.target.value)}
                   fullWidth
                   required
@@ -181,7 +191,7 @@ const Login = () => {
                       sx={styles.login}
                       variant="contained"
                       color="primary"
-                      // onClick={handleLogin}
+                      onClick={handleLogin}
                       fullWidth
                     >
                       Login

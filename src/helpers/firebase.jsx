@@ -34,6 +34,7 @@ export const signup = (email, password) => {
 };
 
 export const login = (email, password) => {
+  console.log(email, password);
   return signInWithEmailAndPassword(auth, email, password);
 };
 

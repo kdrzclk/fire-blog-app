@@ -18,8 +18,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { currentUser } = useSelector((state) => state.auth);
-  const currentUser = true;
+  const { currentUser } = useSelector((state) => state.auth);
+  console.log(currentUser);
+  // const currentUser = true;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {

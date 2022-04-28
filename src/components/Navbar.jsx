@@ -18,8 +18,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { currentUser } = useSelector((state) => state.auth);
-  // const currentUser = true;
+  // const { currentUser } = useSelector((state) => state.auth);
+  const currentUser = true;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -102,9 +102,21 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={() => navigate("/new")}>New</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem
+                  onClick={handleClose}
+                  onMouseUp={() => navigate("/profile")}
+                >
+                  Profile
+                </MenuItem>
+                <MenuItem
+                  onClick={handleClose}
+                  onMouseUp={() => navigate("/new")}
+                >
+                  New
+                </MenuItem>
+                <MenuItem onClick={handleClose} onMouseUp={handleLogout}>
+                  Logout
+                </MenuItem>
               </Menu>
             </div>
           ) : (
@@ -134,8 +146,12 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleLogin}>Login</MenuItem>
-                <MenuItem onClick={handleRegister}>Register</MenuItem>
+                <MenuItem onClick={handleClose} onMouseUp={handleLogin}>
+                  Login
+                </MenuItem>
+                <MenuItem onClick={handleClose} onMouseUp={handleRegister}>
+                  Register
+                </MenuItem>
               </Menu>
             </div>
           )}

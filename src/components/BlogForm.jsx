@@ -26,7 +26,7 @@ const BlogForm = ({ newBlog, setNewBlog, handleFormSubmit }) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    console.log(name, value);
+    // console.log(name, value);
     setNewBlog({ ...newBlog, [name]: value });
   };
 

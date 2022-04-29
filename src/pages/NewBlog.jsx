@@ -21,6 +21,15 @@ const NewBlog = () => {
     e.preventDefault();
     console.log(newBlog);
     AddNewBlog(newBlog);
+    setNewBlog({
+      author: currentUser.email,
+      title: "",
+      content: "",
+      get_comment_count: 0,
+      get_like_count: 0,
+      image: "",
+      published_date: Date.now(),
+    });
   };
 
   return (

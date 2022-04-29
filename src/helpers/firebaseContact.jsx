@@ -9,7 +9,10 @@ import {
   remove,
   update,
 } from "firebase/database";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../redux/actions/appActions";
 
+// Add Information
 export const AddNewBlog = (newBlog) => {
   const db = getDatabase();
   const userRef = ref(db, "blog");
@@ -23,4 +26,32 @@ export const AddNewBlog = (newBlog) => {
     image: newBlog.image,
     published_date: newBlog.published_date,
   });
+};
+
+// Call Information
+export const useFetch = () => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.app);
+  const [blogList, setBlogList] = useState();
+
+  useEffect(() => {
+    // setIsLoading(true);
+    dispatch(setLoading(true));
+
+    const db = getDatabase();
+    const userRef = ref(db, "blog");
+
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      const blogArray = [];
+
+      for (let id in data) {
+        blogArray.push({ id, ...data[id] });
+      }
+      setBlogList(blogArray);
+      // setIsLoading(false);
+      dispatch(setLoading(false));
+    });
+  }, []);
+  return { loading, blogList };
 };

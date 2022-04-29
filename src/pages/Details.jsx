@@ -13,8 +13,17 @@ import { AccountCircle } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import moment from "moment";
+import { useLocation } from "react-router-dom";
+import { useFetch } from "../helpers/firebaseContact";
 
-const Details = () => {
+const Details = (props) => {
+  //     const { blogList } = useFetch();
+
+  //   const getOneBlog = (id) => {
+  //     const result = blogList?.filter((item) => item.id === id);
+  //     return result;
+  //   }
+
   return (
     <Container>
       <div style={{ margin: "70px auto" }}>

@@ -7,6 +7,11 @@ import loadingGif from "../assets/loading.gif";
 const Dashboard = () => {
   const { blogList } = useFetch();
 
+  // function getOneBlog(id) {
+  //   const result = blogList?.filter((item) => item.id === id);
+  //   return result;
+  // }
+
   return (
     <Container>
       <div style={{ margin: "70px auto" }}>

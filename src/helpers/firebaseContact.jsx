@@ -1,4 +1,3 @@
-import { app } from "./firebase";
 import { useState, useEffect } from "react";
 import {
   getDatabase,

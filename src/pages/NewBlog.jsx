@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import BlogForm from "../components/BlogForm";
 import { AddNewBlog } from "../helpers/firebaseContact";
+import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.auth);
   console.log(currentUser?.email);
 
@@ -21,6 +23,7 @@ const NewBlog = () => {
     e.preventDefault();
     console.log(newBlog);
     AddNewBlog(newBlog);
+    navigate("/");
     setNewBlog({
       author: currentUser.email,
       title: "",

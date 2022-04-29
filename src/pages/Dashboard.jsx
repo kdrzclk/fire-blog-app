@@ -2,12 +2,10 @@ import React from "react";
 import BlogCard from "../components/BlogCard";
 import { Typography, Grid, Container } from "@mui/material";
 import { useFetch } from "../helpers/firebaseContact";
-// import { useSelector } from "react-redux";
 import loadingGif from "../assets/loading.gif";
 
 const Dashboard = () => {
   const { blogList } = useFetch();
-  // const { loading } = useSelector((state) => state.app);
 
   return (
     <Container>

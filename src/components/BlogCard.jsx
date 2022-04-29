@@ -12,9 +12,10 @@ import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import moment from "moment";
-import { useFetch } from "../helpers/firebaseContact";
+import { useNavigate } from "react-router-dom";
 
 const BlogCard = ({ post }) => {
+  const navigate = useNavigate();
   const {
     id,
     author,
@@ -26,11 +27,13 @@ const BlogCard = ({ post }) => {
     title,
   } = post;
 
+  const handleDetails = () => {
+    navigate("/details");
+  };
+
   return (
     <Card sx={{ minWidth: "345px", maxWidth: "345px" }}>
-      <CardActionArea
-      //   onClick={openDetails}
-      >
+      <CardActionArea onClick={handleDetails}>
         <CardMedia sx={{ height: "140px" }} image={image} title={title} />
         <CardContent sx={{ backgroundColor: "#efeefe", height: "125px" }}>
           <Typography

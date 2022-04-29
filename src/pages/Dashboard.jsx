@@ -12,7 +12,7 @@ const Dashboard = () => {
   return (
     <div style={{ marginTop: "70px" }}>
       <Typography
-        sx={{ textAlign: "center", color: "#046582" }}
+        sx={{ textAlign: "center", color: "#046582", margin: "50px" }}
         variant="h3"
         noWrap
       >
@@ -23,7 +23,11 @@ const Dashboard = () => {
           <Grid item xs={12}>
             <Grid container justify="center" spacing={5}>
               {blogList === undefined ? (
-                <img src={loadingGif} alt="loading" />
+                <img
+                  src={loadingGif}
+                  style={{ width: "150px", margin: "30px auto" }}
+                  alt="loading"
+                />
               ) : blogList ? (
                 blogList?.map((item, id) => (
                   <Grid key={id} item>

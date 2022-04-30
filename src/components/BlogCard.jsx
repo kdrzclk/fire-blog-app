@@ -28,7 +28,7 @@ const BlogCard = ({ post }) => {
   } = post;
 
   const handleDetails = () => {
-    navigate("/details");
+    navigate("/details", { state: { post } });
   };
 
   return (

@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../helpers/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCurrentUser } from "../redux/actions/authActions";
+import { clearLoading } from "../redux/actions/appActions";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const Navbar = () => {
     setAnchorEl(null);
     logout();
     dispatch(clearCurrentUser());
+    dispatch(clearLoading());
     navigate("/login");
   };
 

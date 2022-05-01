@@ -35,12 +35,17 @@ const NewBlog = () => {
     });
   };
 
+  const updateHandler = (id, title, content, image) => {
+    setNewBlog({ id, title, content, image });
+  };
+
   return (
     <div>
       <BlogForm
         newBlog={newBlog}
         setNewBlog={setNewBlog}
         handleFormSubmit={handleFormSubmit}
+        updateHandler={updateHandler}
       />
     </div>
   );

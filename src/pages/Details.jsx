@@ -18,14 +18,41 @@ import { useLocation } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import loadingGif from "../assets/loading.gif";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import { DeleteBlog } from "../helpers/firebaseContact";
+import { useNavigate } from "react-router-dom";
 
-const Details = (props) => {
+const Details = (props, { updateHandler }) => {
   const { currentUser } = useSelector((state) => state.auth);
   console.log(currentUser);
   const location = useLocation();
   const post = location.state.post;
   console.log(post);
+  const navigate = useNavigate();
 
+  const styles = {
+    delete: {
+      backgroundColor: "#e72b80",
+      color: "white",
+      "&:hover": {
+        backgroundColor: "#c11261",
+      },
+    },
+
+    update: {
+      backgroundColor: "#f3e9e9",
+      color: "black",
+      "&:hover": {
+        backgroundColor: "#a9a2a2",
+      },
+    },
+  };
+
+  const deleteHandler = (id) => {
+    DeleteBlog(id);
+    navigate("/");
+  };
   return (
     <Container>
       <div
@@ -47,7 +74,7 @@ const Details = (props) => {
         </Typography>
 
         <div>
-          <Card sx={{ minWidth: 250, width: "75vw" }}>
+          <Card sx={{ width: "70vw", mx: "auto", mt: 2 }}>
             <div>
               <CardMedia
                 sx={{ height: "0", paddingTop: "56.25%" }}
@@ -101,26 +128,35 @@ const Details = (props) => {
           </Card>
 
           <div
-            sx={{
+            style={{
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-evenly",
-              margin: 20,
+              margin: "20px",
             }}
           >
-            {/* <Button
-              variant="contained"
-              // onClick={() => updateHandler(item.id)}
-            >
-              Update
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              // onClick={() => deleteHandler(item.id)}
-            >
-              Delete
-            </Button> */}
+            {currentUser?.email === post.author ? (
+              <>
+                <Button
+                  variant="contained"
+                  sx={styles.update}
+                  startIcon={<ModeEditOutlineOutlinedIcon />}
+                  onClick={() =>
+                    updateHandler(post.id, post.title, post.content, post.image)
+                  }
+                >
+                  Update
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={styles.delete}
+                  startIcon={<DeleteIcon />}
+                  onClick={() => deleteHandler(post.id)}
+                >
+                  Delete
+                </Button>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

@@ -54,3 +54,20 @@ export const useFetch = () => {
   }, []);
   return { loading, blogList };
 };
+
+export const DeleteBlog = (id) => {
+  const db = getDatabase();
+  const userRef = ref(db, "blog");
+  remove(ref(db, "bağlantı/" + id));
+
+  // Toastify("Kullanıcı bilgisi silindi");
+};
+
+export const UpdateBlog = (newBlog) => {
+  const db = getDatabase();
+  const updates = {};
+
+  updates["blog/" + newBlog.id] = newBlog;
+  // Toastify("bilgiler değiştirildi");
+  return update(ref(db), updates);
+};

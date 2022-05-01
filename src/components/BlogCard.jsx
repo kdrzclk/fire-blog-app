@@ -31,6 +31,10 @@ const BlogCard = ({ post }) => {
     navigate("/details", { state: { post } });
   };
 
+  const handleFavorite = () => {
+    post.get_like_count += 1;
+  };
+
   return (
     <Card sx={{ minWidth: "345px", maxWidth: "345px" }}>
       <CardActionArea onClick={handleDetails}>
@@ -67,7 +71,11 @@ const BlogCard = ({ post }) => {
         </Typography>
       </CardActions>
       <CardActions>
-        <IconButton aria-label="add to favorites" sx={{ p: 3 }}>
+        <IconButton
+          onClick={handleFavorite}
+          aria-label="add to favorites"
+          sx={{ p: 3 }}
+        >
           <FavoriteIcon color={get_like_count > 0 ? "secondary" : "disabled"} />
         </IconButton>
         <Typography variant="body2" color="textSecondary">

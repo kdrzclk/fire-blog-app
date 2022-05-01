@@ -10,6 +10,7 @@ import {
 } from "firebase/database";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../redux/actions/appActions";
+import { toastSuccess } from "./toastNotify";
 
 // Add Information
 export const AddNewBlog = (newBlog) => {
@@ -25,6 +26,7 @@ export const AddNewBlog = (newBlog) => {
     image: newBlog.image,
     published_date: newBlog.published_date,
   });
+  toastSuccess("Blog Added successfully!");
 };
 
 // Call Information
@@ -58,9 +60,9 @@ export const useFetch = () => {
 export const DeleteBlog = (id) => {
   const db = getDatabase();
   const userRef = ref(db, "blog");
-  remove(ref(db, "bağlantı/" + id));
+  remove(ref(db, "blog/" + id));
 
-  // Toastify("Kullanıcı bilgisi silindi");
+  toastSuccess("Deleted successfully!");
 };
 
 export const UpdateBlog = (newBlog) => {
@@ -68,6 +70,7 @@ export const UpdateBlog = (newBlog) => {
   const updates = {};
 
   updates["blog/" + newBlog.id] = newBlog;
-  // Toastify("bilgiler değiştirildi");
+  toastSuccess("Updated successfully!");
+
   return update(ref(db), updates);
 };

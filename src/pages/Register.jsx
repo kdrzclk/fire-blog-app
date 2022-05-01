@@ -16,6 +16,7 @@ import { signup, loginWithGoogle } from "../helpers/firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoading, clearLoading } from "../redux/actions/appActions";
 import loadingGif from "../assets/loading.gif";
+import { toastError, toastSuccess } from "../helpers/toastNotify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -72,10 +73,11 @@ const Register = () => {
       .then(() => {
         navigate("/");
         dispatch(clearLoading());
+        toastSuccess("Registered successfully!");
       })
       .catch((error) => {
-        alert(error);
         dispatch(clearLoading());
+        toastError(error.message);
       });
   };
 

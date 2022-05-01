@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLoading, clearLoading } from "../redux/actions/appActions";
 
 import loadingGif from "../assets/loading.gif";
+import { toastError, toastSuccess } from "../helpers/toastNotify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -79,10 +80,11 @@ const Login = () => {
         navigate("/");
 
         dispatch(clearLoading());
+        toastSuccess("Logged in successfully!");
       })
       .catch((error) => {
-        alert(error);
         dispatch(clearLoading());
+        toastError(error.message);
       });
   };
 

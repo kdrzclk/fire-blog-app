@@ -23,12 +23,12 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import { DeleteBlog } from "../helpers/firebaseContact";
 import { useNavigate } from "react-router-dom";
 
-const Details = (props, { updateHandler }) => {
+const Details = (props) => {
   const { currentUser } = useSelector((state) => state.auth);
   console.log(currentUser);
   const location = useLocation();
   const post = location.state.post;
-  console.log(post);
+
   const navigate = useNavigate();
 
   const styles = {
@@ -53,6 +53,7 @@ const Details = (props, { updateHandler }) => {
     DeleteBlog(id);
     navigate("/");
   };
+
   return (
     <Container>
       <div

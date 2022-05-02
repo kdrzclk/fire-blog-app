@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import BlogForm from "../components/BlogForm";
-import { AddNewBlog, UpdateBlog } from "../helpers/firebaseContact";
+import { AddNewBlog, EditBlog } from "../helpers/firebaseContact";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 const NewBlog = () => {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const NewBlog = () => {
     e.preventDefault();
 
     if (newBlog.id) {
-      UpdateBlog();
+      EditBlog();
     } else {
       AddNewBlog(newBlog);
       navigate("/");
@@ -38,11 +37,6 @@ const NewBlog = () => {
         published_date: Date.now(),
       });
     }
-  };
-
-  const updateHandler = (id, title, content, image) => {
-    navigate(`/update-blog/${id}`);
-    setNewBlog({ id, title, content, image });
   };
 
   return (

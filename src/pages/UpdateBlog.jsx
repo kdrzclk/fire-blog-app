@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Container,
   Box,
@@ -9,8 +9,25 @@ import {
   Button,
 } from "@mui/material";
 import blog from "../assets/blok.png";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { EditBlog } from "../helpers/firebaseContact";
 
-const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
+const UpdateBlog = (props) => {
+  const { currentUser } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const post = location.state.post;
+  const [title2, setTitle] = useState(post.title);
+  const [image2, setImage] = useState(post.image);
+  const [content2, setContent] = useState(post.content);
+  console.log(currentUser.email);
+  console.log(post.id);
+  console.log(title2);
+
+  console.log(post);
+
   const styles = {
     submit: {
       backgroundColor: "#046582",
@@ -23,11 +40,23 @@ const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
     },
   };
 
-  const handleChange = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, value } = e.target;
-    // console.log(name, value);
-    setNewBlog({ ...newBlog, [name]: value });
+
+    const initial = {
+      title: title2,
+      author: currentUser.email,
+      image: image2,
+      content: content2,
+
+      published_date: new Intl.DateTimeFormat("en", {
+        dateStyle: "medium",
+      }).format(Date.now()),
+      id: post.id,
+    };
+    console.log(initial);
+    EditBlog(initial);
+    navigate("/");
   };
 
   return (
@@ -61,10 +90,10 @@ const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
             component="h1"
             sx={{ m: 4, color: "#046582" }}
           >
-            ── New Blog ──
+            ── Update Blog ──
           </Typography>
 
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleSubmit}>
             <Grid spacing={4}>
               <Grid item xs={12}>
                 <TextField
@@ -73,13 +102,10 @@ const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
                   label="Title"
                   name="title"
                   variant="outlined"
-                  type="title"
-                  //   value={newBlog.title}
+                  type="text"
+                  value={title2}
                   autoComplete="on"
-                  // onChange={(e) =>
-                  //   setNewBlog({ ...newBlog, title: e.target.value })
-                  // }
-                  //   onChange={handleChange}
+                  onChange={(e) => setTitle(e.target.value)}
                   //   fullWidth
                   required
                 />
@@ -93,12 +119,9 @@ const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
                   name="image"
                   variant="outlined"
                   type="image-url"
-                  //   value={newBlog.image}
+                  value={image2}
                   autoComplete="on"
-                  // onChange={(e) =>
-                  //   setNewBlog({ ...newBlog, image: e.target.value })
-                  // }
-                  //   onChange={handleChange}
+                  onChange={(e) => setImage(e.target.value)}
                   //   fullWidth
                   required
                 />
@@ -113,12 +136,9 @@ const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
                   multiline
                   variant="outlined"
                   type="image-url"
-                  //   value={newBlog.content}
+                  value={content2}
                   autoComplete="on"
-                  // onChange={(e) =>
-                  //   setNewBlog({ ...newBlog, content: e.target.value })
-                  // }
-                  //   onChange={handleChange}
+                  onChange={(e) => setContent(e.target.value)}
                   //   fullWidth
                   required
                   rows={15}
@@ -129,8 +149,6 @@ const UpdateBlog = ({ newBlog, setNewBlog, handleFormSubmit }) => {
                 <Button
                   sx={styles.submit}
                   variant="contained"
-                  //   color="primary"
-                  //   onClick={handleLogin}
                   fullWidth
                   type="submit"
                 >

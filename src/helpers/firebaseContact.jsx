@@ -65,11 +65,12 @@ export const DeleteBlog = (id) => {
   toastSuccess("Deleted successfully!");
 };
 
-export const UpdateBlog = (newBlog) => {
+export const EditBlog = (initial) => {
+  console.log(initial);
   const db = getDatabase();
   const updates = {};
 
-  updates["blog/" + newBlog.id] = newBlog;
+  updates[`blog/${initial.id}`] = initial;
   toastSuccess("Updated successfully!");
 
   return update(ref(db), updates);

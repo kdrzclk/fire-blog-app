@@ -129,8 +129,6 @@ const BlogForm = ({ newBlog, setNewBlog, handleFormSubmit }) => {
                 <Button
                   sx={styles.submit}
                   variant="contained"
-                  //   color="primary"
-                  //   onClick={handleLogin}
                   fullWidth
                   type="submit"
                 >

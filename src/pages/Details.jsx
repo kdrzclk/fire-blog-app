@@ -3,7 +3,6 @@ import {
   Container,
   Typography,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
@@ -15,9 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
-
 import { useSelector } from "react-redux";
-import loadingGif from "../assets/loading.gif";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import { DeleteBlog } from "../helpers/firebaseContact";
@@ -25,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 
 const Details = (props) => {
   const { currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
+
   const location = useLocation();
   const post = location.state.post;
 
@@ -53,6 +50,10 @@ const Details = (props) => {
     DeleteBlog(id);
     navigate("/");
   };
+
+  // const updateHandler = (id, title, content, image) => {
+  //   // setNewBlog({ id, title, content, image });
+  // };
 
   return (
     <Container>
@@ -142,9 +143,13 @@ const Details = (props) => {
                   variant="contained"
                   sx={styles.update}
                   startIcon={<ModeEditOutlineOutlinedIcon />}
-                  onClick={() =>
-                    updateHandler(post.id, post.title, post.content, post.image)
-                  }
+                  // onClick={() =>
+                  //   updateHandler(post.id, post.title, post.content, post.image)
+                  // }
+                  onClick={() => navigate(`/update-blog`, { state: { post } })}
+                  // onMouseUp={() =>
+                  //   updateHandler(post.id, post.title, post.content, post.image)
+                  // }
                 >
                   Update
                 </Button>

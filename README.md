@@ -1,37 +1,97 @@
-# Redux Nedir, Nasil Uygulanir Projesi
+<p>Clarusway<img align="right"
+  src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"  width="15px"></p>
 
-## `Kurulum`
+# Project-011 : FireBlog App (RC-11)
+
+## Description
+
+Project aims to create a FireBlog App.
+
+## Problem Statement
+
+- We are adding a new project to our portfolios. So you and your colleagues have started to work on the project.
+
+## Project Skeleton
 
 ```
-npm install veya yarn install
+011 - FireBlog App (folder)
+|
+|----readme.md         # Given to the students (Definition of the project)
+SOLUTION
+├── public
+│     └── index.html
+├── src
+│    ├── app-router
+│    │       ├── AppRouter.js
+│    │       └── PrivateRouter.js
+│    ├── components
+│    │       ├── BlogCard.js
+│    │       ├── BlogForm.js
+│    │       └── Navbar.js
+│    ├── contexts
+│    │       ├── AuthContext.js
+│    │       └── BlogContext.js
+│    ├── helpers
+│    │       ├── firebase.js
+│    │       └── toastNotify.js
+│    ├── pages
+│    │       ├── About.js
+│    │       ├── Dashboard.js
+│    │       ├── Details.js
+│    │       ├── Login.js
+│    │       ├── NewBlog.js
+│    │       ├── Profile.js
+│    │       ├── Register.js
+│    │       └── UpdateBlog.js
+│    ├── assets.js
+│    │       └── [images]
+│    ├── App.js
+│    ├── App.css
+│    ├── index.js
+│    └── index.css
+├── .env
+├── package.json
+└── yarn.lock
 ```
 
-## `Kullanilan Kutuphaneler`
+## Expected Outcome
 
-- `redux` :
-  State management kutuphanesidir. React'ten bagimsiz olarak baska platformlar ile de kullanilabilir.
-- `redux-thunk` : Redux ile birlikte thunk teknolojisini kullanabilmek icin kullanilan kutuphanedir.
-- `react-redux` : Redux kutuphanesi ile olusturulan `store` ile React'in haberlesebilmesi icin kullanilan kutuphanedir.
-- `axios` : API istekleri yapabilmek icin kullanilan kutuphanedir.
-- `react-router-dom` : Proje icerisinde farkli URL'ler olusturup bunlar arasinda gezinebilmeyi saglayan kutuphanedir.
+![Project 011 Snapshot](fireblog.gif)
 
-- `@mui/material-ui`
-- `@emotion/react`
-- `@emotion/styled`
-- `firebase`
+## Objective
 
-## `Kullanilacak API`:
+Build a Register FireBlog App using ReactJS.
 
-- https://newsapi.org/
+### At the end of the project, following topics are to be covered;
 
-- URL:
-  const url =
-  "https://newsapi.org/v2/everything?" +
-  "q=Apple&" +
-  "from=2022-04-18&" +
-  "sortBy=popularity&" +
-  "apiKey=1a1a999e0d7240a6bd2dead87bcca78e";
+- HTML
 
-## `Kullanilacak Araclar`
+- CSS
 
-- `Redux Dev Tools` : Chrome uzerinde calisan ve global state uzerinde yapilan tum degisikliklerin takip edilmesini saglayan tarayici uzantisidir. Indirmek icin [tiklayiniz.](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?utm_source=chrome-ntp-icon)`
+- JS
+
+- ReactJS
+
+### At the end of the project, students will be able to;
+
+- improve coding skills within HTML & CSS & JS & ReactJS.
+
+- use git commands (push, pull, commit, add etc.) and Github as Version Control System.
+
+## Steps to Solution
+
+- Step 1 : Create React App using `npx create-react-app fireblog-app`
+
+- Step 2 : Use Firebase Auth for authentication and Firebase Realtime Database for CRUD operations.
+
+- Step 3 : You can use css frameworks like Bootstrap, Semantic UI, Material UI.
+
+- Step 4 : You can view sample app on https://eds-fireblog.herokuapp.com/.
+
+- Step 5 : Add project gif to your project and README.md file.
+
+## Notes
+
+- You can add additional functionalities to your app.
+
+**<p align="center">&#9786; Happy Coding &#9997;</p>**

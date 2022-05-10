@@ -82,6 +82,7 @@ const BlogForm = ({ newBlog, setNewBlog, handleFormSubmit }) => {
                   onChange={handleChange}
                   //   fullWidth
                   required
+                  autoFocus
                 />
               </Grid>
 
